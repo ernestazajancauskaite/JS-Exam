@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weight Converter</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <header>
+      <!-- Header code-->
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <h1 class="headline">Weight Converter</h1>
+      
+        <!-- Users input -->
+        <form>
+          <input type="text" id="search" placeholder="Enter kilograms..." />
+          <input type="submit" id="submit-btn" value="Calculate" />
+        </form>
+        <!-- Place for output after form submission -->
+        <div id="output">
+          <div class="card">
+            <div class="card-block">
+              <h4>Pounds : </h4>
+              <div id="LbsOutput"></div>
+            </div>
+          </div>
+          <div id="output">
+            <div class="card">
+              <div class="card-block">
+                <h4>Grams : </h4>
+                <div id="GOutput"></div>
+              </div>
+            </div>
+            <div id="output">
+              <div class="card">
+                <div class="card-block">
+                  <h4>Ounces : </h4>
+                  <div id="OzOutput"></div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <!-- Footer code -->
+    </footer>
+  </body>
+</html>
