@@ -1,24 +1,22 @@
-/* ------------------------------ TASK 7 -----------------------------------
-Turimas "audi" objektas.
+/* ------------------------------ TASK 9 ---------------------------------------------------------------
+Sukurkite konstruktoriaus funkciją "Movie" (naudokte ES6), kuri gebės sukurti objektus 3 savybėm ir 1 metodu.
 
-Parašykite funkciją "showObjectKeys", kuri kaip argumentą priims objektą 
-ir grąžins visus jo "key" masyve.
--------------------------------------------------------------------------- */
-const audi = {
-  make: 'audi',
-  model: 'A6',
-  year: 2005,
-  color: 'white',
-};
+Savybės:
+title: string
+director: string
+budget: number
 
-console.log(audi)
+Metodas:
+wasExpensive() - jeigu filmo "budget" yra daugiau nei 100 000 000 mln USD, tada grąžins true, kitu atveju false.
+------------------------------------------------------------------------------------------------------ */
 
-function showObjectKeys(make, model, year, color){
-  this.make = make;
-  this.model = model;
-  this.year = year;
-  this.color = color;
-}
-let showObjectKeysArray=[audi] ;
-
-//console.log(showObjectKeysArray)
+class Movie { 
+    constructor (title, director, budget) {
+      this.title = String(title);
+      this.director = String(director);
+      this.budget = Number(budget);
+    }
+    wasExpensive = this.budget > 100000000 ? "true" : "false";
+     }
+     
+     
