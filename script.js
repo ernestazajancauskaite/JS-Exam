@@ -1,34 +1,41 @@
-/* ------------------------------ TASK 5 -----------------------------------
-Turimas "users" masyvas. 
+/* ------------------------------ TASK 4 -----------------------------------
+Parašykite JS kodą, vartotojui atėjus į tinklapį kreipsis į cars.json failą
+ir iš atvaizduos visus automobilių gamintojus ir pagamintus modelius. 
+Kiekvienas gamintojas turės savo atvaizdavimo "kortelę", kurioje bus 
+nurodomas gamintojas ir jo pagaminti modeliai.
 
-Parašykite funckijas, kurios atlikas nurodytas užduotis:
-1. funkcija "filterDogOwers" - kaip argumentą priims masyvą ir duoto masyvo 
-atveju grąžins "users", kurie turi augintinį.
-2. funkcija "filterAdults" - kaip argumentą priims masyvą ir duoto masyvo 
-atveju grąžins masyvą su "users", kurie yra pilnamečiai.
+
+Pastaba: Sukurta kortelė, kurioje yra informacija apie automobilį (brand), turi 
+turėti bent minimalų stilių ir būti responsive;
+const ENDPOINT = 'cars.json';
 -------------------------------------------------------------------------- */
+const ENDPOINT = 'cars.json';
 
-const users = [
-  { id: '1', name: 'John Smith', age: 20, hasDog: true },
-  { id: '2', name: 'Ann Smith', age: 24, hasDog: false },
-  { id: '3', name: 'Tom Jones', age: 31, hasDog: true },
-  { id: '4', name: 'Rose Peterson', age: 17, hasDog: false },
-  { id: '5', name: 'Alex John', age: 25, hasDog: true },
-  { id: '6', name: 'Ronald Jones', age: 63, hasDog: true },
-  { id: '7', name: 'Elton Smith', age: 16, hasDog: true },
-  { id: '8', name: 'Simon Peterson', age: 30, hasDog: false },
-  { id: '9', name: 'Daniel Cane', age: 51, hasDog: true },
-];
+const renderBrandCard = (data) => {
+  const card = document.createElement('div')
+  card.classList = 'card'
+  const brand = document.createElement('h4');
+  brand.innerText = `${data.brand}`;
+  const models = document.createElement(`h5`);
+  models.innerText = data.models;
+  // Put it all together
+  card.appendChild(brand);
+  card.appendChild(models);
+  return card
+};
 
-const filterDogOwners = users.filter ((users)=> {
-  return users.hasDog === true;
-})
- console.log(filterDogOwners)
+const updateList = async () => {
+  const output = document.getElementById('output');
+  try {
+    // Load json data
+    const response = await fetch(ENDPOINT);
+    if (response.ok) {
+      const data = await response.json();
+      data.forEach(e => output.appendChild(renderBrandCard(e)));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-
-const filterAdults = users.filter((users) => {
- return users.age > 18;
-});
-console.log(filterAdults)
-
-
+updateList();
