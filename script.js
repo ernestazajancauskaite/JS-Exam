@@ -1,41 +1,31 @@
-/* ------------------------------ TASK 4 -----------------------------------
-Parašykite JS kodą, vartotojui atėjus į tinklapį kreipsis į cars.json failą
-ir iš atvaizduos visus automobilių gamintojus ir pagamintus modelius. 
-Kiekvienas gamintojas turės savo atvaizdavimo "kortelę", kurioje bus 
-nurodomas gamintojas ir jo pagaminti modeliai.
+/* ------------------------------ TASK 6 -----------------------------------
+Turimas "users" masyvas. 
 
-
-Pastaba: Sukurta kortelė, kurioje yra informacija apie automobilį (brand), turi 
-turėti bent minimalų stilių ir būti responsive;
-const ENDPOINT = 'cars.json';
+Parašykite funckijas, kurios atlikas nurodytas užduotis:
+1. funkcija "getUserAverageAge" - kaip argumentą priims masyvą ir duoto masyvo 
+atveju grąžins visų "users" amžiaus visurkį kaip skaičių.
+2. funkcija "getUsersNames" -  kaip argumentą priims masyvą ir duoto masyvo 
+atveju grąžins visų "users" vardus naujame masyve pvz., ['John Smith', 'Ann Smith'..].
 -------------------------------------------------------------------------- */
-const ENDPOINT = 'cars.json';
 
-const renderBrandCard = (data) => {
-  const card = document.createElement('div')
-  card.classList = 'card'
-  const brand = document.createElement('h4');
-  brand.innerText = `${data.brand}`;
-  const models = document.createElement(`h5`);
-  models.innerText = data.models;
-  // Put it all together
-  card.appendChild(brand);
-  card.appendChild(models);
-  return card
-};
+const users = [
+  { id: '1', name: 'John Smith', age: 20 },
+  { id: '2', name: 'Ann Smith', age: 24 },
+  { id: '3', name: 'Tom Jones', age: 31 },
+  { id: '4', name: 'Rose Peterson', age: 17 },
+  { id: '5', name: 'Alex John', age: 25 },
+  { id: '6', name: 'Ronald Jones', age: 63 },
+  { id: '7', name: 'Elton Smith', age: 16 },
+  { id: '8', name: 'Simon Peterson', age: 30 },
+  { id: '9', name: 'Daniel Cane', age: 51 },
+];
 
-const updateList = async () => {
-  const output = document.getElementById('output');
-  try {
-    // Load json data
-    const response = await fetch(ENDPOINT);
-    if (response.ok) {
-      const data = await response.json();
-      data.forEach(e => output.appendChild(renderBrandCard(e)));
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
+//1 užduotis
+const arr = users.map (x => x.age)
+//console.log(users.map(x => x.age))
+const userAverageAge = arr.reduce((a, b) => a + b, 0) / arr.length;
+console.log(userAverageAge);
 
-updateList();
+//2 užduotis
+const getUsersNames = users.map (x => x.name)
+console.log(getUsersNames)
