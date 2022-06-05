@@ -1,31 +1,57 @@
-/* ------------------------------ TASK 6 -----------------------------------
-Turimas "users" masyvas. 
+/* ------------------------------ TASK 3 -----------------------------------
+Parašykite JS kodą, kuris leis vartotojui paspaudus ant mygtuko "Show users"
+pamatyti vartotojus iš Github API (endpoint'as pateiktas žemiau).
 
-Parašykite funckijas, kurios atlikas nurodytas užduotis:
-1. funkcija "getUserAverageAge" - kaip argumentą priims masyvą ir duoto masyvo 
-atveju grąžins visų "users" amžiaus visurkį kaip skaičių.
-2. funkcija "getUsersNames" -  kaip argumentą priims masyvą ir duoto masyvo 
-atveju grąžins visų "users" vardus naujame masyve pvz., ['John Smith', 'Ann Smith'..].
+Paspaudus mygtuką "Show users":
+1. Informacija atvaizdavima <div id="output"></div> bloke
+1.1. Informacija, kuri pateikiama: "login" ir "avatar_url" reikšmės (kortelėje)
+2. Žinutė "Press "Show Users" button to see users" turi išnykti;
+
+Pastaba: Sukurta kortelė, kurioje yra pateikiama vartotojo informacija, turi 
+turėti bent minimalų stilių ir būti responsive;
+const ENDPOINT = 'https://api.github.com/users';
 -------------------------------------------------------------------------- */
 
-const users = [
-  { id: '1', name: 'John Smith', age: 20 },
-  { id: '2', name: 'Ann Smith', age: 24 },
-  { id: '3', name: 'Tom Jones', age: 31 },
-  { id: '4', name: 'Rose Peterson', age: 17 },
-  { id: '5', name: 'Alex John', age: 25 },
-  { id: '6', name: 'Ronald Jones', age: 63 },
-  { id: '7', name: 'Elton Smith', age: 16 },
-  { id: '8', name: 'Simon Peterson', age: 30 },
-  { id: '9', name: 'Daniel Cane', age: 51 },
-];
+const ENDPOINT = 'https://api.github.com/users';
 
-//1 užduotis
-const arr = users.map (x => x.age)
-//console.log(users.map(x => x.age))
-const userAverageAge = arr.reduce((a, b) => a + b, 0) / arr.length;
-console.log(userAverageAge);
+function fetchUsers() {
+  console.log('You have clicked on "Show Users"!')
+  fetch(ENDPOINT, {})
+    .then(response => response.json())
+    .then(data => console.log(data))
+}
 
-//2 užduotis
-const getUsersNames = users.map (x => x.name)
-console.log(getUsersNames)
+const btn = document.getElementById('btn')
+btn.addEventListener('click', fetchUsers)
+
+// render users (login avatar_url)
+// socialCar 
+// for loop? forEach() ? 
+// 
+
+const renderUserCard = (data) => {
+  const card = document.createElement('div')
+  card.classList = 'card'
+  const login = document.createElement('h4');
+  login.innerText = `${data.login}`;
+  const avatarUrl = document.createElement(`h5`);
+  avatarUrl.innerText = data.avatar_url;
+  card.appendChild(login);
+  card.appendChild(avatarUrl);
+  return card
+};
+
+const updateList = async () => {
+  const output = document.getElementById('output');
+  try {
+    const response = await fetch(ENDPOINT);
+    if (response.ok) {
+      const data = await response.json();
+      data.forEach(e => output.appendChild(renderUserCard(e)));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+updateList();
