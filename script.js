@@ -1,57 +1,18 @@
-/* ------------------------------ TASK 3 -----------------------------------
-Parašykite JS kodą, kuris leis vartotojui paspaudus ant mygtuko "Show users"
-pamatyti vartotojus iš Github API (endpoint'as pateiktas žemiau).
+/* ------------------------------ TASK 10 ---------------------------------------------------
+Sutvarkykite užduoties "Task 10" esančius failus taip, kad veiktų žemiau pateiktos funkcijos.
+-------------------------------------------------------------------------------------------- */
+import {composition} from './modules/math/composition.js'
+import {division} from './modules/math/division.js'
+import {multiplication} from './modules/math/multiplication.js'
+import {substraction} from './modules/math/subtraction.js'
+import {one, two, three, four, five} from './modules/numbers/numbers.js'
 
-Paspaudus mygtuką "Show users":
-1. Informacija atvaizdavima <div id="output"></div> bloke
-1.1. Informacija, kuri pateikiama: "login" ir "avatar_url" reikšmės (kortelėje)
-2. Žinutė "Press "Show Users" button to see users" turi išnykti;
+let a = composition(one, four);
+let b = division(four, two);
+let c = substraction(three, two);
+let d = multiplication(five, two);
 
-Pastaba: Sukurta kortelė, kurioje yra pateikiama vartotojo informacija, turi 
-turėti bent minimalų stilių ir būti responsive;
-const ENDPOINT = 'https://api.github.com/users';
--------------------------------------------------------------------------- */
-
-const ENDPOINT = 'https://api.github.com/users';
-
-function fetchUsers() {
-  console.log('You have clicked on "Show Users"!')
-  fetch(ENDPOINT, {})
-    .then(response => response.json())
-    .then(data => console.log(data))
-}
-
-const btn = document.getElementById('btn')
-btn.addEventListener('click', fetchUsers)
-
-// render users (login avatar_url)
-// socialCar 
-// for loop? forEach() ? 
-// 
-
-const renderUserCard = (data) => {
-  const card = document.createElement('div')
-  card.classList = 'card'
-  const login = document.createElement('h4');
-  login.innerText = `${data.login}`;
-  const avatarUrl = document.createElement(`h5`);
-  avatarUrl.innerText = data.avatar_url;
-  card.appendChild(login);
-  card.appendChild(avatarUrl);
-  return card
-};
-
-const updateList = async () => {
-  const output = document.getElementById('output');
-  try {
-    const response = await fetch(ENDPOINT);
-    if (response.ok) {
-      const data = await response.json();
-      data.forEach(e => output.appendChild(renderUserCard(e)));
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-updateList();
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
